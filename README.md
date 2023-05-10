@@ -35,6 +35,29 @@ stream {
 ```bash
 sudo service nginx reload
 ```
+#### Remove a VM or a container
+1. Stop the VM or container
+```bash
+docker stop container_name
+# or 
+vmrun stop /path/to/vm.vmx nogui
+```
+2. Remove the VM file if needed
+```bash
+rm /path/to/vm.vmx
+```
+3. Delete host record
+```bash
+sed -i '/target_ip sub.domain.com/d' /etc/hosts
+```
+4. Delete nginx config file
+```bash
+rm /etc/nginx/sites-enabled/sub.domain.com.conf
+```
+5. Apply changes
+```bash
+sudo service nginx reload
+```
 ## VM Ware (cli) CheatSheet
 #### VMs Management
 ```bash
