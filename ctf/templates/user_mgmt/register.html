@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    <title>INS'Hack 2024 | HOME</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Register</h1>
+    <p>This is register view.</p>
+    <form method="post" onsubmit="validate(this); return false;" novalidate>
+        {% csrf_token %}
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email">
+        </div>
+        <button type="submit">Send verification link</button>
+    </form>
+
+    <script>
+    function showError(conteinerParentNode, errorMessage) {
+        conteinerParentNode.className = 'error';
+        var spanElem = document.createElement('span');
+        spanElem.className = "error-message";
+        spanElem.innerHTML = errorMessage;
+        conteinerParentNode.appendChild(spanElem);
+    }
+    
+    function resetError(conteinerParentNode) {
+        conteinerParentNode.className = '';
+        if (conteinerParentNode.lastChild.className == "error-message") {
+            conteinerParentNode.removeChild(conteinerParentNode.lastChild);
+        }
+    }
+    
+    function validate(form) {
+        var elems = form.elements;
+        var regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+            if(!elems.email.value) {
+                showError(elems.email.parentNode, ' Please enter your Email.');
+                return false;
+            }
+            else if (!regEmail.test(elems.email.value) == true){
+                showError(elems.email.parentNode, ' Please enter a valid Email.');
+                return false;
+            }
+            form.submit();
+            
+            alert('Mail envoyé! Il met généralement entre 5 et 10 minutes à arriver, alors soyez patient et buvez un café! Si vous ne le recevez pas, vérifiez votre dossier spam. Si vous ne le trouvez toujours pas, contactez-nous sur Discord.');
+    }
+    </script>
+{% endblock %}
