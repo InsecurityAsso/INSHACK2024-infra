@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    <title>INS'Hack 2024 | Register</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Création de compte</h1>
+    <h3>Le compte sera soumis à une vérification avant d'obtenir un accès à la plateforme.</h3>
+    <form action="/register/create_account" method="POST" onsubmit="validate(this); return false;" novalidate>
+        {% csrf_token %}
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ email }}" readonly><br><br>
+        
+        <label for="first_name">Prénom:</label>
+        <input type="text" id="first_name" name="first_name" required><br><br>
+        
+        <label for="last_name">Nom:</label>
+        <input type="text" id="last_name" name="last_name" required><br><br>
+        
+        <label for="school_name">Nom de l'école:</label>
+        <input type="text" id="school_name" name="school_name" required><br><br>
+        
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <label for="confirm_password">Confirmer le mot de passe:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required><p id="validity"></p>
+        <br><br>
+        
+        <label for="student_id">Photo de carte étudiante/identité:</label>
+        <input type="file" id="student_id" name="student_id" required><br><br>
+        
+        <input type="submit" value="Créer le compte">
+    </form>
+    
+    <script>
+        var validity = document.getElementById("validity");
+        function validate(form) {
+            if (form.password.value != form.confirm_password.value) {
+                form.confirm_password.setCustomValidity("Les mots de passe ne correspondent pas.");
+                validity.innerHTML = "Les mots de passe ne correspondent pas.";
+                return false;
+            } else if(form.password.value.length < 8) {
+                form.confirm_password.setCustomValidity("Le mot de passe doit contenir au moins 8 caractères.");
+                validity.innerHTML = "Le mot de passe doit contenir au moins 8 caractères.";
+                return false;
+            } else if (form.password.value.length >= 8 && form.first_name.value != '' && form.last_name.value  != '' && form.school_name.value  != '' && form.student_id.value != '' ){
+                confirm_password.setCustomValidity('');
+                form.submit();
+            } else {
+                form.confirm_password.setCustomValidity("Veuillez remplir tous les champs.");
+                validity.innerHTML = "Veuillez remplir tous les champs.";
+                return false;
+            }
+        }
+    </script>
+
+    
+{% endblock %}

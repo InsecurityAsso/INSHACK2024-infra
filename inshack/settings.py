@@ -84,6 +84,8 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'ctf.player'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -124,6 +126,9 @@ STATIC_ROOT = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "inshack" / "static",
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
