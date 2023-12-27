@@ -1,4 +1,65 @@
 # Infrastructure Ins'Hack 2024
+
+## Deployong development server
+1. Create a virtual environement and source it (optional) 
+```bash
+python3 -m venv venv
+
+# source venv on linux/OSX
+source venv/bin/activate
+
+# source venv on windows
+venv\Scripts\activate.bat
+```
+2. Run the server
+```bash
+python3 test_server.py
+```
+
+## Project Roadmap
+### 1. Web interface
+#### 1.1. Frontend
+- [in progress] Home page
+- [in progress] Login page
+- [in progress] Register page
+- [not sarted] Profile page
+- [not sarted] Challenges page
+- [not sarted] Scoreboard page
+- [in progress] users verification
+- [in progress] users authentication
+- [not started] users password reset
+- [not started] teams management
+#### 1.2. Backend
+- [in progress] users mail check (still need to fix possible duplicate)
+- [in progress] users password check
+- [in progress] email user after verifiecation
+- [in progress] email user after registration
+- [not started] password reset
+- [not started] teams management
+- [not started] API to interact with other components (VPN, Nginx, docker, ...)
+### 2. Network  infrastructure
+#### 2.1. Docker
+- [not started] Dockerfile for web interface
+- [not started] Dockerfile for VPN
+- [not started] docker-compose.yml file for whole infrastructure
+#### 2.2. VPN
+- [not started] VPN server conf
+- [not started] VPN client conf
+#### 2.3. Nginx
+- [not started] Nginx conf
+### 3. Challenges
+#### 3.1. Challenges creation
+- [not started] Create challenges
+- [not started] Create challenges categories
+- [not started] Create challenges levels
+- [not started] Create challenges hints
+- [not started] Create challenges flags
+- [not started] Create challenges dockerfiles
+
+#### 3.2. Challenges deployment
+- [not started] Create docker subnet for each team
+
+
 ## Networking CheatSheet
 #### Create a bridge interface on host
 ```bash

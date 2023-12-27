@@ -135,4 +135,8 @@ GitHub.sublime-settings
 
 # other data
 contrib/*.json
+test_data
+
+# media files 
+media/*
 
