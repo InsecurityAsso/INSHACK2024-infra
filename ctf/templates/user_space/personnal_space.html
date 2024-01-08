@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}INSHack 2024 | My Space{% endblock %}
+
+{% block header %}
+    <title>INSHack 2024 | My Space</title>
+
+    <link rel="stylesheet" href="{% static 'css/markdown.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<h1>Personal Space</h1>
+<div style="display: flex; flex-direction: row; width: 80%; justify-content: space-around; margin-left: auto; margin-right: auto;">
+    <div>
+        <h2>Profile Preview</h2>
+        <h3>Bonjour {{ user.first_name }} {{user.last_name }}.</h3>
+        <h4>{{ user.school }}</h4>
+        <h4>Equipe : {{ user.team }}</h4>
+        <img src="{% if user.profile_picture %} {{ user.profile_picture.url }} {% else %} /media/profile_pictures/default.png {% endif %}" alt="profile_picture" style="aspect-ratio: 1/1; max-width: 50px;">
+
+        <p>Points marqués : {{ user.score }}</p>
+        {{ bio|safe }}
+    </div>
+    <div>
+        <h2>Edit profile</h2>
+        <form action="/myspace" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Edit">
+        </form>
+    </div>
+</div>
+{% endblock %}

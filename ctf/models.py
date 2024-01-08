@@ -16,6 +16,6 @@ class player(AbstractUser):
     biography = models.TextField(verbose_name='Biographie', null=True, blank=True)
     score = models.IntegerField(verbose_name='Score', null=False, default=0, blank=True)
     is_verified = models.BooleanField(verbose_name='Est vérifié', null=False, default=False)
-    id_card = models.FileField(verbose_name='Carte étudiant', null=True, blank=True)
-    profile_picture = models.FileField(verbose_name='Photo de profil', null=True, blank=True)
+    id_card = models.FileField(verbose_name='Carte étudiant', null=True, blank=True, upload_to='id_docs/')
+    profile_picture = models.ImageField(verbose_name='Photo de profil', null=True, blank=True, upload_to='profile_pictures/')
     team = models.ForeignKey(team, verbose_name='Équipe', on_delete=models.SET_NULL, null=True, blank=True)

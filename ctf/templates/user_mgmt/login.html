@@ -8,4 +8,13 @@
 {% block content %}
     <h1>Login</h1>
     <p>CTF is the login view.</p>
+    <form action="/login" method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" name="email" id="email">
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        
+        <input type="submit" value="Login">
 {% endblock %}

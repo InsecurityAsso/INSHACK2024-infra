@@ -27,12 +27,14 @@ from ctf.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('login', login, name='login'),
+    path('login', user_login, name='login'),
+    path('logout', user_logout, name='logout'),
     path('register', register, name='register'),
     path('register/verified/<str:email>/<str:token>', register_verified, name='register_verified'),
     path('register/create_account', create_account, name='create_account'),
     path('user_checkup', user_checkup, name='user_checkup'),
-    path('user_checkup_done', user_checkup_done, name='user_checkup_done'),
+    path('418', teapot, name='teapot'),
+    path('myspace', myspace, name='personal_space'),
 ]
 
 if settings.DEBUG:
