@@ -16,6 +16,7 @@ from contrib.MarkdownRenderer import markdown_to_html
 from ctf.models import player
 from ctf.forms import *
 
+# store tokens for special links
 TOKENS = {}
 
 # Create your views here.
@@ -58,7 +59,12 @@ def user_logout(request):
     return redirect('index')
 
 def register(request):
-    if request.method == 'POST':
+    # handle tokenized verified link
+    if request.method == 'GET':
+        token = request.GET.get('token')
+        if token:
+            return register_verified(request, token)
+    elif request.method == 'POST':
         # get form data
         email = request.POST.get('email')
         
@@ -68,10 +74,11 @@ def register(request):
             return redirect('index')
 
         token = str(uuid.uuid4().hex)
+        
         # store token in TOKENS dict
-        TOKENS[email] = token
+        TOKENS[token] = email
 
-        link = f"http://localhost:8000/register/verified/{base64.b64encode(email.encode('utf-8')).decode('utf-8')}/{token}"
+        link = f"http://localhost:8000/register?token={token}"
 
         send_mail(email, 'Email de confirmation', loader.render_to_string('mails/verify_email.html', {'title': 'Email de confirmation', 'link': link}))
         
@@ -80,17 +87,13 @@ def register(request):
     
     return render(request, 'user_mgmt/register.html')
 
-def register_verified(request, email, token):
+def register_verified(request, token):
     try:
-        # decode token with base64 to retrerive email
-        if email != 'test':
-            email = base64.b64decode(email).decode('utf-8')
-        # check if token is valid
-        if DEBUG is True and email == 'test' and token == 'test':
+        if DEBUG and token == 'test':
             email = 'matheo.d91@gmail.com'
-        elif TOKENS.get(email) == token:
-            # remove token from TOKENS dict
-            del TOKENS[email]
+        elif token in TOKENS:
+            email = TOKENS.get(token)
+            del TOKENS[token]
         else:
             messages.error(request, "Le lien de confirmation est invalide ou a expiré, merci de réessayer.<br>Si le problème persiste, <a href='contact'>contactez-nous</a>.")
             return redirect('index')
