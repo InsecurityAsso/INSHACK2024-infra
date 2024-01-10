@@ -19,6 +19,9 @@ from ctf.forms import *
 # store tokens for special links
 TOKENS = {}
 
+# store user fails
+FAILS = {}
+
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
@@ -193,3 +196,33 @@ def myspace(request):
 
 def teapot(request):
     return render(request, 'errors/418.html')
+    
+@login_required(login_url='login')
+def delete_account(request):
+    if request.method == 'GET':
+        token = request.GET.get('token')
+        if token:
+        # confirm with password the account deletion
+
+    else:
+        password = request.POST.get('password')
+        if request.user.check_password(password):
+            id = request.user.id
+            # delete user and return index with success message
+            if id in FAILS:
+                del FAILS[id]
+            pass
+        else:
+            # return fail message
+            FAILS[id] = FAILS.get(id, 0) + 1
+            pass
+
+@login_required(login_url='login')
+def change_password(request):
+    if request.method == 'GET':
+        # show reset page
+        pass
+    else:
+        # replace user password
+        # then return index with success message
+        pass
