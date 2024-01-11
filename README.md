@@ -1,6 +1,6 @@
 # Infrastructure Ins'Hack 2024
 
-## Deployong development server
+## Deploying development server
 1. Create a virtual environement and source it (optional) 
 ```bash
 python3 -m venv venv
