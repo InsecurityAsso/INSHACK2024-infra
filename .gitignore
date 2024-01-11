@@ -141,7 +141,7 @@ test_data
 media/*
 
 # migrations files
-ctf/migrations/*
+accounts/migrations/*
 
 # test/proof of concept files
 *test.*

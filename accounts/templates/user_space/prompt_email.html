@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}INSHack 2024 | My Space{% endblock %}
+
+{% block header %}
+    <title>INSHack 2024 | My Space</title>
+
+    <link rel="stylesheet" href="{% static 'css/markdown.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message | safe }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<h1>Email prompt</h1>
+<h1>Merci de confirmer votre email afin de {{ context }}</h1>
+
+<form method="post" onsubmit="validate(this); return false;" novalidate>
+    {% csrf_token %}
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email">
+    </div>
+    <button type="submit">Send verification link</button>
+</form>
+
+<script src="{% static 'js/check_email.js' %}"></script>
+{% endblock %}

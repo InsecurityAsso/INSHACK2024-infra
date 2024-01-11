@@ -7,7 +7,7 @@ from email.mime.multipart import MIMEMultipart
 
 path = pathlib.Path(os.path.abspath(os.path.dirname(__file__)))
 
-Body = open(path / "New message.html", "r").read()
+Body = """INS'HACK 2024"""
 creds = json.load(open(path / "mail_creds.json", "r"))
 
 def send_mail(dest, subject="Notification", content=Body):

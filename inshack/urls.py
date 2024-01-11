@@ -21,12 +21,13 @@ from django.urls import path
 from inshack import settings
 from django.conf.urls.static import static
 
-from ctf.views import *
+from accounts.views import *
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('index', index, name='index_alt'),
     path('login', user_login, name='login'),
     path('logout', user_logout, name='logout'),
     path('register', register, name='register'),
@@ -35,6 +36,8 @@ urlpatterns = [
     path('user_checkup', user_checkup, name='user_checkup'),
     path('418', teapot, name='teapot'),
     path('myspace', myspace, name='personal_space'),
+    path('dangerzone/delete', delete_account, name='delete_account'),
+    path('dangerzone/reset', change_password, name='reset_password'),
 ]
 
 if settings.DEBUG:

@@ -203,3 +203,7 @@ docker run -d \
 --name container_name image_name \
  -p host_port:container_port # can be used multiple times
 ```
+
+# credits (to add to a footer or something) 
+- [flaticon](https://www.flaticon.com/)
+- [pixabay](https://pixabay.com/)

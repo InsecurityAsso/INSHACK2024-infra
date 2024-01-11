@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    <title>INS'Hack 2024 | Register</title>
+{% endblock %}
+
+
+{% block content %}
+    <p>This is the register view.</p>
+    
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <form method="post" onsubmit="validate(this); return false;" novalidate>
+        {% csrf_token %}
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email">
+        </div>
+        <button type="submit">Send verification link</button>
+    </form>
+
+    <script src="{% static 'js/check_email.js' %}"></script>
+
+{% endblock %}

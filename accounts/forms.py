@@ -12,6 +12,7 @@ class playerRegistrationForm(forms.ModelForm):
         widgets = {
             'email': forms.EmailInput(attrs={'readonly': 'readonly'}), 
             'username': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'token': forms.TextInput(attrs={'readonly': 'readonly'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -35,10 +36,13 @@ class playerRegistrationForm(forms.ModelForm):
             
 
 class updateProfile(forms.ModelForm):
-    """Form that allows player to change thier profile picture and biography"""
+    """Form that allows players to change their profile picture and biography"""
+    clear_pp = forms.BooleanField(required=False, initial=False, widget=forms.CheckboxInput(attrs={'id': 'clear_pp'}))
+
     class Meta:
         model = player
         fields = ['profile_picture', 'biography']
+
         widgets = {
             'profile_picture': forms.FileInput(attrs={'accept': 'image/*', 'enctype': 'multipart/form-data'}),
         }
@@ -47,10 +51,18 @@ class updateProfile(forms.ModelForm):
         super(updateProfile, self).__init__(*args, **kwargs)
         self.fields['profile_picture'].label = 'Photo de profil'
         self.fields['biography'].label = 'Biographie'
+        self.fields['clear_pp'].label = 'Supprimer la photo de profil'
 
-        # set id for all fields taht is the same as the name
+        # Set id for all fields that is the same as the name
         for field in self.fields.values():
             field.widget.attrs.update({'id': field.label.lower().replace(' ', '_')})
+
+        # change order to put clear_pp right after profile_picture
+        self.fields = {
+            'profile_picture': self.fields['profile_picture'],
+            'clear_pp': self.fields['clear_pp'],
+            'biography': self.fields['biography'],
+        }
 
     class Media:
         enctype = 'multipart/form-data'

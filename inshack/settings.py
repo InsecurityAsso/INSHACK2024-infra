@@ -37,9 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ctf',
-    'pygments',
-    'markdown',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +57,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / "inshack" / "templates",
-            BASE_DIR / "ctf" / "templates",
+            BASE_DIR / "accounts" / "templates",
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -86,7 +84,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'ctf.player'
+AUTH_USER_MODEL = 'accounts.player'
 
 
 # Password validation

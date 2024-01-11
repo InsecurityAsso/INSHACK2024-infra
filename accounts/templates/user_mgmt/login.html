@@ -8,6 +8,17 @@
 {% block content %}
     <h1>Login</h1>
     <p>CTF is the login view.</p>
+
+    {% block messages %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endblock %}
+
     <form action="/login" method="post">
         {% csrf_token %}
         <label for="username">Username:</label>
@@ -16,7 +27,10 @@
         <label for="password">Password:</label>
         <input type="password" name="password" id="password">
         
+        <input type="hidden" name="next" value="{{ next }}">
+
         <input type="submit" value="Login">
         <br>
         <button href="/reset">Reset password</button>
+    </form>
 {% endblock %}

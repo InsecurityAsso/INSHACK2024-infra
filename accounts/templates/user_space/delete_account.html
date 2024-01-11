@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}INSHack 2024 | My Space{% endblock %}
+
+{% block header %}
+    <title>INSHack 2024 | My Space</title>
+
+    <link rel="stylesheet" href="{% static 'css/markdown.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<h1>Delete account confirm page</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="email" value="{{ email }}">
+    <input type="hidden" name="token" value="{{ token }}">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <input type="submit" value="Confirmer la suppression  du compte">
+</form>
+
+{% endblock %}

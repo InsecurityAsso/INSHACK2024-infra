@@ -13,7 +13,7 @@
 {% if messages %}
     {% for message in messages %}
         <div class="alert alert-{{ message.tags }}">
-            {{ message }}
+            {{ message | safe }}
         </div>
     {% endfor %}
 {% endif %}
@@ -35,9 +35,18 @@
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Edit">
+            
         </form>
-        <button href="/reset">Change password</button>
-        <button href="/dangerzone">Delete account</button>
+
+        <a href="/dangerzone/reset">
+            <button>Change password</button>
+        </a>
+
+        <a href="/dangerzone/delete">
+            <button>Delete account</button>
+        </a>
+        
+        
     </div>
 </div>
 {% endblock %}

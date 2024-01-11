@@ -8,10 +8,7 @@ except ImportError:
     os.system('pip install -r requirements.txt')
 
 # créer la db si elle n'existe pas
-if not os.path.exists('db.sqlite3'):
-    os.system('sqlite3 db.sqlite3')
-
-# appliquer les migrations
+# et appliquer les migrations
 os.system('python manage.py makemigrations')
 os.system('python manage.py migrate')
 
