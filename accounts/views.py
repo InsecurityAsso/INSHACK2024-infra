@@ -354,7 +354,6 @@ def delete_account(request):
             
 
 
-
 @login_required(login_url='login')
 def change_password(request):
     if request.method == 'GET':

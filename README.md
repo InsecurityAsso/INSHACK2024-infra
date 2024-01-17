@@ -19,24 +19,26 @@ python3 test_server.py
 ## Project Roadmap
 ### 1. Web interface
 #### 1.1. Frontend
-- [in progress] Home page
-- [in progress] Login page
-- [in progress] Register page
-- [not sarted] Profile page
-- [not sarted] Challenges page
-- [not sarted] Scoreboard page
-- [in progress] users verification
-- [in progress] users authentication
+- [not started] Home page
+- [not started] Login page
+- [not started] Register page
+- [not started] Profile page
+- [not started] Challenges page
+- [not started] Scoreboard page
+- [not started] users verification
+- [not started] users authentication
 - [not started] users password reset
 - [not started] teams management
 #### 1.2. Backend
-- [in progress] users mail check (still need to fix possible duplicate)
-- [in progress] users password check
-- [in progress] email user after verifiecation
-- [in progress] email user after registration
-- [not started] password reset
+- [done] users mail check
+- [done] users password check
+- [done] email user after verification
+- [done] user personnal space
+- [implemented] account deletion - requires further testing
+- [in progress] password reset - logic is done, implementation is been worked on
 - [not started] teams management
 - [not started] API to interact with other components (VPN, Nginx, docker, ...)
+- [not started] Implement defense against bruteforce attacks (with django-ratelimit most likely)
 ### 2. Network  infrastructure
 #### 2.1. Docker
 - [not started] Dockerfile for web interface
